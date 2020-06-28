@@ -13,7 +13,7 @@ You can get reports, assign works, look at charts and statistics. There are two 
 <li>ASP.NET Core 3.1 (with .NET Core 3.1)</li>
 <li>ASP.NET Core MVC </li>
 <li>ASP.NET Identity Core </li>
-<li>Entity Framework Core 3.1 </li>
+<li>Entity Framework Core</li>
 <li>AutoMapper </li>
 <li>FluentValidator </li>
 <li>Google Charts </li>
