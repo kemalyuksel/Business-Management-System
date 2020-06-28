@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "StatusCode";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="row mt-5">
+    <div class="col-md-3">
+        <img src="~/img/warningicon.png" class="w-100 img-fluid" />
+    </div>
+
+    <br />
+    <div class="col-md-6 text-center">
+        <p class="mt-5 display-4"><span class="text-danger">@ViewBag.Code</span><br />@ViewBag.Message</p>
+        <a class="font-weight-bold text-info" href='javascript:history.go(-1)'>Geri Dön</a>
+    </div>
+
+    <div class="col-md-3">
+        <img src="~/img/warningicon.png" class="w-100 img-fluid" />
+    </div>
+</div>

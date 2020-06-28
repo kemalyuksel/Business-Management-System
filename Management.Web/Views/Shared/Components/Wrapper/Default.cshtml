@@ -1,0 +1,42 @@
+﻿@model AppUserListDto
+
+@{
+
+    string active = TempData["Active"]?.ToString();
+}
+
+<div class="border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading text-center">
+        <img src="~/img/@Model.Picture" class="img-thumbnail" style="height:12rem!important;width:12rem!important" alt="@Model.Name">
+    </div>
+    <div class="list-group list-group-flush">
+        <a asp-action="Index" asp-controller="Home" class="list-group-item list-group-item-action  @(active == "home"?"active":"")"><i class="fas fa-home mr-2"></i>Anasayfa</a>
+        <a asp-action="Index" asp-controller="Work" class="list-group-item list-group-item-action
+                   @(active == "work"?"active":"")"><i class="fas fa-tasks mr-2"></i>Görev İşlemleri</a>
+        <a asp-action="Index" asp-controller="WorkOrder" class="list-group-item list-group-item-action
+                   @(active == "workOrder"?"active":"")"><i class="fas fa-file mr-2"></i>İş Emirleri</a>
+        <a asp-action="Index" asp-controller="Urgency" class="list-group-item list-group-item-action
+                   @(active == "urgency"?"active":"")"><i class="fas fa-exclamation mr-2"></i>Aciliyet İşlemleri</a>
+        <a asp-action="Index" asp-controller="Graphic" class="list-group-item list-group-item-action  @(active == "graphic"?"active":"")"><i class="fas fa-chart-pie mr-2"></i>Grafikler</a>
+        <a asp-action="Index" asp-controller="Notification" class="list-group-item list-group-item-action  @(active == "notification"?"active":"")">
+            <i class="fas fa-bell mr-2"></i>
+            @if (ViewBag.NotificationsCount > 0)
+            {
+                <sub class="badge badge-info badge-pill position-absolute" style="bottom:0.625rem!important;left:1.6rem!important">
+                    @ViewBag.NotificationsCount
+                </sub>
+                <span class="ml-1">Bildirimler</span>
+            }
+            else
+            {
+                <span>Bildirimler</span>
+            }
+
+
+        </a>
+        <a asp-action="Index" asp-controller="Profile" class="list-group-item list-group-item-action
+                   @(active == "profile"?"active":"")"><i class="fas fa-user mr-2"></i>Profilim</a>
+        <a asp-area="" asp-action="LogOut" asp-controller="Home" class="list-group-item list-group-item-action"><i class="fas fa-sign-out-alt mr-2 text-danger"></i>Çıkış Yap</a>
+
+    </div>
+</div>

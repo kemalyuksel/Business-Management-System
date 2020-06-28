@@ -1,0 +1,55 @@
+﻿@model AppUserRegisterDto
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<form class="mt-5 mx-auto w-50 p-3 shadow " asp-action="Register" method="post">
+    <h4 class="text-center">Kayıt Ol</h4><hr />
+    <div class="form-group">
+        <label asp-for="@Model.Name">Ad</label>
+        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+        <input asp-for="@Model.Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Surname">Soyad</label>
+        <span asp-validation-for="@Model.Surname" class="text-danger"></span>
+        <input asp-for="@Model.Surname" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.UserName">Kullanıcı Adı</label>
+        <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+        <input asp-for="@Model.UserName" class="form-control" />
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="@Model.Email">E-Mail</label>
+        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+        <input asp-for="@Model.Email" class="form-control" />
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="@Model.Password">Şifre</label>
+        <span asp-validation-for="@Model.Password" class="text-danger"></span>
+        <input type="password" asp-for="@Model.Password" class="form-control" />
+    </div>
+
+    <div class="form-group mb-4">
+        <label asp-for="@Model.ConfirmPassword">Şifre Onay</label>
+        <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
+        <input type="password" asp-for="@Model.ConfirmPassword" class="form-control" />
+    </div>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div>
+        <button type="submit" class="btn btn-info text-center font-weight-bold lead">Kayıt Ol</button>
+        <a asp-action="Index" asp-controller="Home" class="btn btn-success text-center font-weight-bold">Giriş Yap</a>
+    </div>
+
+</form>

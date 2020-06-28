@@ -1,0 +1,57 @@
+﻿@model ReportUpdateDto
+
+@{
+    ViewData["Title"] = "UpdateReport";
+    Layout = "~/Areas/Member/Views/Shared/_MemberLayout.cshtml";
+}
+
+<form method="post" asp-action="UpdateReport" class="w-75 mx-auto p-3">
+
+    <div class="lead">
+
+        <h4 class="text-info text-center lead">GÜNCELLENEK RAPORUN GÖREV BİLGİLERİ</h4>
+        <hr />
+
+        <p>
+            <h5><label class="text-danger ">İş : </label> @Model.Work.Name</h5>
+        </p>
+
+        <p>
+            <h5><label class="text-danger ">İş Tanımı : </label> @Model.Work.Description</h5>
+        </p>
+
+        <p>
+            <h5><label class="text-danger ">İş Aciliyeti : </label> <label class="badge badge-dark">@Model.Work.Urgency.Description</label></h5>
+        </p>
+        <hr />
+    </div>
+
+
+    <input type="hidden" asp-for="@Model.Id" />
+
+    <div class="form-group">
+        <label asp-for="@Model.Description">Tanım</label>
+        <span asp-validation-for="@Model.Description" class="text-danger"></span>
+        <input asp-for="@Model.Description" class="form-control" />
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="@Model.Detail">Açıklama</label>
+        <span asp-validation-for="@Model.Detail" class="text-danger"></span>
+        <textarea asp-for="@Model.Detail" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <a asp-action="Index" class="btn btn-danger btn-sm"><i class="fas fa-chevron-circle-left mr-1"></i>Vazgeç</a>
+        <button type="submit" class="btn btn-info btn-sm"><i class="fas fa-check mr-1"></i>Kaydet</button>
+    </div>
+
+</form>
+
+@section Scripts{
+
+    <script src="~/lib/jquery/jqueryValidate/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery/jqueryUnob/jquery.validate.unobtrusive.min.js"></script>
+
+}

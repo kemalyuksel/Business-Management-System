@@ -1,0 +1,35 @@
+﻿@model AppUserLoginDto
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<form class="mt-5 mx-auto w-50 p-3 shadow " asp-action="SignIn" method="post">
+    <h4 class="text-center">Giriş Yap</h4><hr />
+    <div class="form-group">
+        <label asp-for="@Model.UserName">Kullanıcı Adı</label>
+        <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+        <input asp-for="@Model.UserName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Password">Şifre</label>
+        <span asp-validation-for="@Model.Password" class="text-danger"></span>
+        <input type="password" asp-for="@Model.Password" class="form-control" />
+    </div>
+
+    <div class="form-check mb-2" style="margin-left:-20px">
+        <input type="checkbox" asp-for="@Model.RememberMe" class="form-check-inline" />
+        <label asp-for="@Model.RememberMe" class="form-check-label">Beni Hatırla</label>
+    </div>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-success text-center font-weight-bold">Giriş Yap</button>
+        <a asp-action="Register" asp-controller="Home" class="btn btn-info text-center font-weight-bold ">Kayıt Ol</a><br />
+    </div>
+    <a asp-action="ForgetPassword" asp-controller="Home" class="text-info">Şifremi Unuttum</a>
+
+</form>

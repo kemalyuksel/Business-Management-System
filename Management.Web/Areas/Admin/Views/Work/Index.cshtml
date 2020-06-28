@@ -1,0 +1,100 @@
+﻿@model List<WorkListDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@if (Model.Count > 0)
+{
+    <a asp-action="AddWork" asp-controller="Work" class="btn btn-outline-success btn-sm my-2"><i class="fas fa-plus-circle mr-2"></i>Görev Ekle</a>
+
+    <table class="table table-hover table-bordered mt-2 table-sm">
+        <thead>
+            <tr>
+                <th>Ad</th>
+                <th>Açıklama</th>
+                <th>Oluşturulma Tarihi</th>
+                <th>Aciliyet Durum</th>
+                <th width="11%">İşlem</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.CreatedTime.ToString("D")</td>
+                    <td>@item.Urgency.Description</td>
+                    <td>
+                        <a asp-action="UpdateWork" asp-controller="Work" asp-route-id="@item.Id"
+                           class="btn btn-warning btn-sm">Güncelle<i class="fas fa-edit ml-2"></i></a>
+                        <a data-toggle="modal" data-target="#deleteModal" data-id="@item.Id"
+                           class="btn btn-danger btn-sm text-white">Sil<i class="fas fa-times-circle ml-2"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+else
+{
+    <div class="text-center mt-4 text-danger">
+        <p class="lead">  Kayıtlı görev bulunmamaktadır.</p>
+        <a asp-action="AddWork" asp-controller="Work" class="btn btn-info btn-sm my-2">Görev Ekle</a>
+    </div>
+}
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Silme Onay</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Silmek istediğinize emin misiniz ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                <button id="btnDelete" type="button" class="btn btn-primary">Sil</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#deleteModal").on("show.bs.modal", function (event) {
+                let element = $(event.relatedTarget);
+                let id = element.data("id");
+
+                $("#btnDelete").click(function () {
+
+                    $.ajax({
+                        type: "Get",
+                        url: "./Work/DeleteWork",
+                        data: { id: id },
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function () {
+                            window.location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.statusText);
+                        }
+                    })
+                });
+            })
+        });
+    </script>
+
+}

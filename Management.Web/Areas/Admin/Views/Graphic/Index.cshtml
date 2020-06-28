@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div id="piechart" style="width: 900px; height: 500px;"></div>
+    </div>
+
+    <div class="col-md-6">
+        <div id="piechartt" style="width: 900px; height: 500px;"></div>
+    </div>
+
+
+</div>
+
+
+@section Scripts{
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            let top5Completer = [['Personel Adı', 'Görev Sayısı']];
+
+            $.ajax({
+                type: "Get",
+                url: "./Graphic/MostCompleter",
+                async: false,
+                success: function (data) {
+                    let ReqObject = jQuery.parseJSON(data);
+                    $.each(ReqObject, (index, value) => {
+                        top5Completer.push([value.Name + " / " + value.WorkCount, value.WorkCount]);
+                    });
+
+                }
+            })
+
+            var data = google.visualization.arrayToDataTable(top5Completer);
+
+            var options = {
+                title: 'Şuan Görevde Çalışanlar'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+
+            chart.draw(data, options);
+
+        }
+
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart2);
+
+        function drawChart2() {
+
+            let TopWorkCompleter = [['Personel Adı', 'Görev Sayısı']];
+
+            $.ajax({
+                type: "Get",
+                url: "./Graphic/TopWorkCompleter",
+                async: false,
+                success: function (data) {
+                    let ReqObject2 = jQuery.parseJSON(data);
+                    $.each(ReqObject2, (index, value) => {
+                        TopWorkCompleter.push([value.Name + " / " +value.WorkCount, value.WorkCount]);
+                    });
+
+                }
+            })
+
+
+            var data = google.visualization.arrayToDataTable(TopWorkCompleter);
+
+            var options = {
+                title: 'En Çok İş Tamamlayan Personeller'
+            };
+
+            var chartt = new google.visualization.PieChart(document.getElementById('piechartt'));
+
+
+            chartt.draw(data, options);
+
+        }
+    </script>
+
+
+
+}

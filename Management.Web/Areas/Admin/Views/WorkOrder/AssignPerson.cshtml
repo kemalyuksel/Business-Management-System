@@ -1,0 +1,71 @@
+﻿@model AssignPersonListDto
+@{
+    ViewData["Title"] = "AssignPerson";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row mt-2 offset-1 ">
+
+    <div class="col-md-10  float-md-left mb-2 text-center">
+
+        <form asp-action="AssignStaff" method="post">
+            <p class="lead">Aşağıdaki göreve ilgili personel atanacaktır.&nbsp;Bu işlemi gerçekleştirmek istediğinizden emin misiniz?</p>
+            <div class="form-group">
+                <a asp-action="AssignStaff" asp-route-id="@Model.Work.Id" class="btn btn-danger text-white">
+                    <i class="fas fa-caret-left mr-2"></i>
+                    Hayır,vazgeç
+                </a>
+                <input type="hidden" name="PersonId" value="@Model.AppUser.Id" />
+                <input type="hidden" name="WorkId" value="@Model.Work.Id" />
+                <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-check mr-2"></i>Evet,görevlendir</button>
+            </div>
+        </form>
+
+    </div>
+
+    <div class="col-md-4 mb-2">
+
+        <div class="card w-100 shadow">
+            <div class="card-header text-center lead">Görev Bilgileri</div>
+            <div class="card-body">
+                <h5 class="card-title">@Model.Work.Name</h5>
+                <p class="card-text">@Model.Work.Description</p>
+                <p class="card-text">
+                    <strong>Aciliyet Durumu:&nbsp;</strong>
+                    <span class="badge badge-primary p-1"> @Model.Work.Urgency.Description </span>
+                </p>
+                <p class="card-text">
+                    <small>@Model.Work.CreatedTime.ToString("D")</small>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-6 float-md-left">
+
+        <div class="card mb-2 shadow">
+            <div class="card-header text-center lead">Personel Bilgileri</div>
+            <div class="row no-gutters">
+                <div class="col-md-4 text-center p-4" style="margin-top:-15px">
+                    <img src="~/img/@Model.AppUser.Picture" class="card-img w-75 rounded-circle shadow" style="height:10rem!important" alt="@Model.AppUser.Name">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.AppUser.Name @Model.AppUser.SurName</h5>
+                        <p class="card-text">
+                            <getAppUserId app-user-id="@Model.AppUser.Id"></getAppUserId>
+                        </p>
+                        <p class="card-text">
+                            <span class="badge badge-info">İletişim:&nbsp;</span>
+                            <small class="text-muted">@Model.AppUser.Email</small>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,104 @@
+﻿@model WorkListDto
+
+@{
+    ViewData["Title"] = "AssignStaff";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    string s = (string)ViewBag.search;
+}
+
+<div class="row mt-2 offset-1">
+
+
+    <div class="col-md-10  float-md-left mb-2">
+
+        @if (!string.IsNullOrWhiteSpace(s))
+        {
+            <div class="border border-dark p-3 mb-2">
+                <strong>
+                    @($"'{s}'")
+                </strong> için sonuçlar görüntüleniyor.
+
+                <a asp-action="AssignStaff" asp-route-id="@Model.Id" class="float-right text-danger">Filtreyi Kaldır</a>
+            </div>
+        }
+
+        <form method="get" asp-action="AssignStaff" class="text-right">
+            <input type="text" name="key" placeholder="Personel Ara"
+                   class="form-control-sm border-primary border-top-0 border-left-0 border-right-0" />
+            <button type="submit" class="btn btn-primary btn-sm">Ara</button>
+        </form>
+    </div>
+
+    <div class="col-md-4 mb-2">
+        <div class="card w-100 shadow">
+            <div class="card-header text-center lead">Görev Bilgileri</div>
+            <div class="card-body">
+                <h5 class="card-title">@Model.Name</h5>
+                <p class="card-text">@Model.Description</p>
+                <p class="card-text">
+                    <strong>Aciliyet Durumu:&nbsp;</strong>
+                    <span class="badge badge-primary p-1"> @Model.Urgency.Description </span>
+                </p>
+                <p class="card-text">
+                    <small>@Model.CreatedTime.ToString("D")</small>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-6 float-md-left">
+
+        @foreach (var item in (List<AppUserListDto>)ViewBag.users)
+        {
+            <div class="card mb-2 shadow" style="height:11rem!important">
+                <div class="row no-gutters">
+                    <div class="col-md-4 text-center p-4">
+                        <img src="~/img/@item.Picture" class="card-img w-75 rounded-circle shadow" style="height:8rem!important" alt="@item.Name">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name @item.SurName</h5>
+                            <p class="card-text">
+                                <getAppUserId app-user-id="@item.Id"></getAppUserId>
+                            </p>
+                            <p class="card-text">
+                                <span class="badge badge-info">İletişim:&nbsp;</span>
+                                <small class="text-muted">@item.Email</small>
+                                <a asp-action="AssignPerson" asp-route-PersonId="@item.Id" asp-route-WorkId="@Model.Id"
+                                   class="btn btn-primary text-white float-right mt-2 btn-sm"><b>Görevlendir</b></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination float-right">
+
+                @if (!string.IsNullOrWhiteSpace(s))
+                {
+                    @for (int i = 1; i <= ViewBag.pageCount; i++)
+                    {
+                        <li class="page-item @(ViewBag.activePage==i?"active":"")">
+                            <a class="page-link" asp-action="AssignStaff" asp-route-id="@Model.Id" asp-route-key="@s" asp-route-page="@i">@i</a>
+                        </li>
+                    }
+                }
+                else
+                {
+                    @for (int i = 1; i <= ViewBag.pageCount; i++)
+                    {
+                        <li class="page-item @(ViewBag.activePage==i?"active":"")">
+                            <a class="page-link" asp-action="AssignStaff" asp-route-id="@Model.Id" asp-route-page="@i">@i</a>
+                        </li>
+                    }
+                }
+            </ul>
+        </nav>
+
+    </div>
+
+</div>

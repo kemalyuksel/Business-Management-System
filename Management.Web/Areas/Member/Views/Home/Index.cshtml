@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Member/Views/Shared/_MemberLayout.cshtml";
+}
+
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="card text-white bg-primary mb-3 mt-2">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Bekleyen Görevler</h4>
+                    <p class="card-text display-4 text-center">@ViewBag.UnWorkCount</p>
+
+                    <p class="text-center">
+                        <a asp-action="Index" asp-controller="WorkOrder" class="text-white ">İncele<i class="fas fa-chevron-circle-right ml-2"></i> </a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+            <div class="card text-white bg-dark mb-3 mt-2">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Tamamlanan Görevler</h4>
+                    <p class="card-text display-4 text-center">@ViewBag.WorkCount</p>
+
+                    <p class="text-center">
+                        <a asp-action="Index" asp-controller="Work" class="text-white ">İncele<i class="fas fa-chevron-circle-right ml-2"></i> </a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card text-white bg-info mb-3 mt-2">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Yazılan Raporlar</h4>
+                    <p class="card-text display-4 text-center">@ViewBag.ReportCount</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card text-white bg-success mb-3 mt-2">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Okunmayan Bildirimler</h4>
+                    <p class="card-text display-4 text-center">@ViewBag.NotificationCount</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+

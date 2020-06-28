@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+    <div class="row">
+
+
+        <div class="col-md-12">
+            <div class="card text-white bg-danger mb-3 mt-2">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Atanma Bekleyen Görevler</h4>
+                    <p class="card-text display-4 text-center">@ViewBag.UnAssignedWorkCount</p>
+
+                    <p class="text-center">
+                        <a asp-action="Index" asp-controller="WorkOrder" class="text-white ">İncele<i class="fas fa-chevron-circle-right ml-2"></i> </a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card text-white bg-primary mb-3 mt-2">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Çalışılan Görevler</h4>
+                    <p class="card-text display-4 text-center">@ViewBag.WorkCount</p>
+
+                    <p class="text-center">
+                        <a asp-action="Index" asp-controller="WorkOrder" class="text-white ">İncele<i class="fas fa-chevron-circle-right ml-2"></i> </a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card text-white bg-success mb-3 mt-2">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Yazılmış Raporlar</h4>
+                    <p class="card-text display-4 text-center">@ViewBag.ReportCount</p>
+
+                    <p class="text-center">
+                        <a asp-action="Index" asp-controller="WorkOrder" class="text-white ">İncele<i class="fas fa-chevron-circle-right ml-2"></i> </a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card text-white bg-dark mb-3 mt-2">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Tamamlanan Görevler</h4>
+                    <p class="card-text display-4 text-center">@ViewBag.CompletedWorkCount</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card text-white bg-info mb-3 mt-2">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Bildirimler</h4>
+                    <p class="card-text display-4 text-center">@ViewBag.NotificationCount</p>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>

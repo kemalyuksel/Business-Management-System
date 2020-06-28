@@ -1,0 +1,65 @@
+﻿@model WorkListAllDto
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+
+    #excel {
+        color: green;
+    }
+
+        #excel:hover {
+            color: white;
+        }
+
+    #pdf {
+        color: #bb2121;
+    }
+
+        #pdf:hover {
+            color: white;
+        }
+</style>
+
+@if (Model.Reports.Count > 0)
+{
+    <h5 class="text-center mt-5 mb-3">
+        <label class="text-info lead">@($"{Model.AppUser.Name+" "+Model.AppUser.Surname}")</label> isimli personelinizin
+        <label class="text-info lead">@($"'{Model.Name}'")</label> görevine yazmış olduğu raporlar.
+    </h5>
+
+    <div class="text-left mb-3">
+        <a asp-action="GetExcel" asp-route-id="@Model.Id" target="_blank" id="excel" class="btn btn-outline-success btn-sm  mt-2"><span class="fa fa-file-excel mr-1"></span>Excel</a>
+        <a asp-action="GetPdf" asp-route-id="@Model.Id" target="_blank" id="pdf" class="btn btn-outline-danger btn-sm  mt-2"><span class="fa fa-file-pdf mr-1"></span>Pdf</a>
+    </div>
+
+    <table class="table table-hover table-sm mt-2 text-center table-bordered table-striped">
+
+        <tr>
+            <th width="20%">Tanım</th>
+            <th>Detay</th>
+        </tr>
+
+        @foreach (var item in Model.Reports)
+        {
+            <tr>
+                <td>@item.Description</td>
+                <td>@item.Detail</td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+
+    <div class="alert alert-info text-center " role="alert">
+        <h5>
+            <strong>@Model.AppUser.Name @Model.AppUser.Surname</strong> isimli personel
+            <strong>@Model.Name</strong> görevi üzerinde çalışıyor. Henüz bir rapor yazmamış.
+        </h5>
+    </div>
+}

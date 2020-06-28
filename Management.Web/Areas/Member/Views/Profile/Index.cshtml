@@ -1,0 +1,92 @@
+﻿@model AppUserListDto
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Member/Views/Shared/_MemberLayout.cshtml";
+}
+
+@if (TempData["updateMessage"] != null)
+{
+    <div class="alert alert-success text-center alert-dismissible fade show" role="alert">
+        @TempData["updateMessage"].ToString()
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+
+<form class="w-75 mx-auto p-3" asp-action="Index" method="post" enctype="multipart/form-data">
+
+    <input type="hidden" asp-for="@Model.Id" />
+
+    <div class="form-group">
+        <label asp-for="@Model.Name">Ad</label>
+        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+        <input asp-for="@Model.Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.SurName">Soyad</label>
+        <span asp-validation-for="@Model.SurName" class="text-danger"></span>
+        <input asp-for="@Model.SurName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Email">E-Mail</label>
+        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+        <input asp-for="@Model.Email" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <div class="row mt-4">
+
+            <div class="col-md-2">
+
+            </div>
+
+            <div class="col-md-4">
+                <div>
+                    <h5 class="text-center mb-2" style="margin-right:85px">Güncel Resim</h5>
+                    <img src="~/img/@Model.Picture" class="card-img w-75 img-thumbnail shadow" style="height:18rem!important" alt="@Model.Name">
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-2">
+                <div id="preview" style="display:none!important;">
+                    <h5 class="text-center">Seçilen Resim</h5>
+                    <img id="picPreview" src="" class="card-img w-75 ml-5 img-thumbnail shadow" style="height:18rem!important">
+                </div>
+            </div>
+
+            <div class="col-md-2">
+
+            </div>
+
+            <div class="col-md-12">
+                <label>Resim Seç:</label>
+                <input type="file" class="form-control-file bg-light" name="Picture" id="Picture" />
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-info btn-sm"><i class="fas fa-check mr-2"></i>Kaydet</button>
+</form>
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#Picture").change(function (e) {
+                $("#preview").show();
+                $("#picPreview").attr('src', URL.createObjectURL(e.target.files[0]));
+
+            });
+        });
+
+    </script>
+
+}
+
